@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'Escrow System',
 
     /*
     |--------------------------------------------------------------------------
@@ -178,6 +178,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laraveldaily\Quickadmin\QuickadminServiceProvider::class,
+        Abhitheawesomecoder\Escrow\EscrowServiceProvider::class,
+        Abhitheawesomecoder\Escrowpaypal\EscrowpaypalServiceProvider::class,
 
     ],
 

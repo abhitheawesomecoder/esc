@@ -1,0 +1,19 @@
+{
+    "name": "abhitheawesomecoder/escrow",
+    "description": "Escrow System Module",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Abhishek Kumar",
+            "email": "abhitheawesomecoder@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+       "psr-4": {
+           "Abhitheawesomecoder\\Escrow\\": "src/"
+       }
+     }
+}

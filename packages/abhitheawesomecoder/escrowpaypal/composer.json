@@ -1,0 +1,19 @@
+{
+    "name": "abhitheawesomecoder/escrowpaypal",
+    "description": "Paypal extension of Escrow System",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Abhishek Kumar",
+            "email": "abhitheawesomecoder@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+       "psr-4": {
+           "Abhitheawesomecoder\\Escrowpaypal\\": "src/"
+       }
+     }
+}
