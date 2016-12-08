@@ -1,43 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-$( document ).ready(function() {
-
-  $( "#target" ).submit(function( event ) {
-    event.preventDefault();
-    $("#message").css('color', 'green');
-    $("#message").html("Verifying please wait.....");
-    $.post($("#target").attr('action'), $('#target').serialize(), function( data ) {
-      if(data.code == 2){
-        $("#message").html("Now redirecting to Paypal");
-        window.location.href = data.url;
-      }else{
-        $("#message").css('color', 'red');
-        $("#message").html("Error occured");
-      }
-      console.log(data);
-}, "json");
-
-
-  });
-
-});
-</script>
 
 
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Make Payment</div>
+                <div class="panel-heading">Withdraw Amount</div>
                 <div class="panel-body">
-                    <form id="target" class="form-horizontal" role="form" method="POST" action="{{ url('escrow/deposit/paypal') }}">
+                    <form id="target" class="form-horizontal" role="form" method="POST" action="{{ url('escrow/withdraw/paypal') }}">
                         {{ csrf_field() }}
-                        <div id="message" style="text-align:center;margin-bottom:10px;color:green;">{{ $success or '' }}</div>
 
-                        <input type="hidden" name="url" value="{{ url('escrow/deposit/paypal') }}">
+                        <div id="message" style="text-align:center;margin-bottom:10px;color:green;">{{ $message or '' }}</div>
+
+                        <input type="hidden" name="url" value="{{ url('escrow/withdraw/paypal') }}">
 
                         <div class="form-group{{ $errors->has('amount') ? ' has-error' : '' }}">
                             <label for="amount" class="col-md-4 control-label">Amount</label>
@@ -53,13 +30,27 @@ $( document ).ready(function() {
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('paypalid') ? ' has-error' : '' }}">
+                            <label for="paypalid" class="col-md-4 control-label">Paypal Id</label>
+
+                            <div class="col-md-6">
+                                <input id="paypalid" type="text" class="form-control" name="paypalid" value="{{ old('paypalid') }}" required autofocus>
+
+                                @if ($errors->has('paypalid'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('paypalid') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
 
 
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Make Payment
+                                    Withdraw
                                 </button>
 
                             </div>

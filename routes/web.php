@@ -12,6 +12,19 @@
 */
 
 Route::get('/', function () {
+/*
+//change packages to vendor
+  $path = public_path('../packages/abhitheawesomecoder');
+
+  var_dump(file_exists($path));
+  foreach (scandir($path)as $key => $value) {
+    if((strpos($value, 'escrow') !== false)&&(strlen($value) > 6)){
+
+      var_dump(str_replace("escrow","",$value));
+    }
+  }
+
+  exit();*/
     return view('welcome');
 });
 

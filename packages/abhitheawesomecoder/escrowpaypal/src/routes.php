@@ -9,4 +9,9 @@ Route::group(['middleware' => ['web','auth']], function () {
 
   Route::post('/escrow/deposit/paypal', 'abhitheawesomecoder\escrowpaypal\controllers\DepositController@savedeposit');
 
+  Route::get('/escrow/withdraw/paypal', 'abhitheawesomecoder\escrowpaypal\controllers\WithdrawController@withdrawform');
+
+  Route::post('/escrow/withdraw/paypal', 'abhitheawesomecoder\escrowpaypal\controllers\WithdrawController@savewithdrawlrequest');
+
+
 });

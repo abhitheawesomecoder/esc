@@ -19,6 +19,11 @@ class WithdrawlController extends Controller
 
   public function withdrawlform()
   {
+    return view("escrowpaypal::withdrawlform")
+  }
+
+  public function savewithdrawlrequest()
+  {
 
   }
 

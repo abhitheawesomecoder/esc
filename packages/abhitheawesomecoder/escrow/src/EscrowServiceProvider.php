@@ -3,7 +3,7 @@
 namespace Abhitheawesomecoder\Escrow;
 
 use Illuminate\Support\ServiceProvider;
-
+use App\Extensions;
 class EscrowServiceProvider extends ServiceProvider
 {
     /**
@@ -13,6 +13,28 @@ class EscrowServiceProvider extends ServiceProvider
      */
      public function boot()
      {
+       // extension installation starts
+               $path = public_path('../packages/abhitheawesomecoder');
+               $pathescrow = public_path('../packages/abhitheawesomecoder/escrow');
+
+              if(file_exists($path)){
+                if(file_exists($pathescrow)){
+                  $arr = [];
+                   foreach (scandir($path)as $key => $value) {
+                     if((strpos($value, 'escrow') !== false)&&(strlen($value) > 6)){
+                       $str = str_replace("escrow","",$value);
+                       $this->installextensions($str);
+                       array_push($arr,$str);
+                     }
+                   }
+                   // loop through the extension list
+                   // check if the extension name matches with any of the directory name
+                   // if not then delete it
+                    Extensions::whereNotIn("name",$arr)->delete();
+              }
+             }
+     // extension installation ends
+
           $this->loadViewsFrom(__DIR__.'/views', 'escrow');
           $this->publishes([
           __DIR__.'/migrations' =>  database_path('/migrations')
@@ -43,8 +65,30 @@ class EscrowServiceProvider extends ServiceProvider
      *
      * @return void
      */
+     function installextensions($extname){
+       $ext = Extensions::where("name",$extname)->first();
+       if($ext){
+       }else{
+
+         $ext = new Extensions;
+         $ext->name = $extname;
+         $ext->url = $extname."-d";
+         $ext->status = 0;
+         $ext->type = 1;
+         $ext->save();
+
+         $ext = new Extensions;
+         $ext->name = $extname;
+         $ext->url = $extname."-w";
+         $ext->status = 0;
+         $ext->type = 2;
+         $ext->save();
+
+       }
+     }
      public function register()
      {
+
          include __DIR__.'/routes.php';
          $this->app->make('Abhitheawesomecoder\Escrow\Controllers\TransferController');
 
